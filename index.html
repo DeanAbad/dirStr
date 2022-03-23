@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta author="Dean Harold P. Abad" alias="MumuNiMochii">
+    <meta about="The dirStr is a converter app for string and directory/path. This tool can be used for getting properly formatted strings of paths, which its format is needed strictly by certain apps.">
+    <title>dirStr</title>
+    <link rel="shortcut icon" href="logo_icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div id="main">
+        <div id="info" onclick="_info('open')">?</div>
+        <span id="infoSpan">
+            <div>
+                <div id="quit" onclick="_info('quit')">x</div>
+                <img id="logo" src="logo_icon.png" alt="logo">
+                <br>
+                <h2>Info</h2>
+                <ul>
+                    <li>Pressing the <kbd>Convert</kbd> button converts the given string into directory/path and vice versa.</li>
+                    <li>Pressing the <kbd>Clear</kbd> erases all fields in a converter section e.g. <i>String to Directory</i>.</li>
+                    <li>
+                        <table>
+                            <tr>
+                                <th>Format</th>
+                                <th>Allows</th>
+                            </tr>
+                            <tr>
+                                <td>C:/The Cool User/Awesome Games</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td>C:/The Cool User/Awesome Games/</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td>\C:/The Cool User/Awesome Games</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td>\C:/The Cool User/Awesome Games/</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td>./The Cool User/Awesome Games</td>
+                                <td>Yes</td>
+                            </tr>
+                        </table>
+                        <ul id="note">
+                            <li>
+                                Note: Examples are applicable to directory as well: <i>./test here/now</i> is also feasible with <i>./test%20here/now.</i>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <br>
+                <h2>Update</h2>
+                <ul>
+                    <li>Since yesterday in the evening, the Internet connection came back, and so I worked with the <kbd>escape()</kbd> and <kbd>unescape()</kbd> functions, as Intellisense tells that they are already depreciated (although <b>not fully</b>); I changed them into <kbd>encodeURI()</kbd> and <kbd>decodeURI()</kbd> respectively.</li>
+                    <li>Thanks to the Internet, I was able to get some good stuff at Stack Overflow and MDN Web Docs with regex; now the converter checks for regex first.</li>
+                </ul>
+                <br>
+                <h2>Why make it?</h2>
+                <ul>
+                    <li>There are times when I need the escaped string of directory to paste on certain apps, so this tool is good for that. Although, certainly, there are already countless apps out there which are superior than mine, but I am reviewing JavaScript and wanted to build it, so I did.</li>
+                    <li>To test and apply what I have learned with freeCodeCamp's <i>Responsive Web Design</i> course, and see how far I have recalled or at least understood legitimately.</li>
+                    <li id="rantBtn" onclick="_toggle()">► Rants</li>
+                    <li id="rantLst">
+                        <ul>
+                            <li>It has been 3 days already and there is still no Internet connection. As such, the work on projects was disrupted, especially on the <i>GDScript highlight.js</i>. Even without the Internet, there are still books here which I used. Still, as books they are, they were a bit outdated; even so, I was able to learn a few things.</li>
+                            <li>While coding this, I was listening to <i>Mechvibes</i>. This is my first time using it, and I guess it has this placebo effect in which I was able to focus more on my work. I just love the sounds of <span style="text-decoration: line-through;">loud</span> typing.</li>
+                            <li><span style="text-decoration: line-through;">Bored as hell</span> even though I have played some retro games to freshen my mind with game development, I still lack the motivation to do the job; I am still feeling out of place due to the lack of information from around the globe, and also due to the absence of communication means to the few I converse with. By creating something, the feeling of incompleteness is temporarily filled.</li> 
+                        </ul>
+                    </li>
+                </ul>
+                <br>
+                <h2>Resource</h2>
+                <ul>
+                    <li>Web Applications Programming Language: Presentations Made Easy, Revised Edition<span class="author">Marmello Villanueva Abante, MA-Math, MIT, PhD, DIT(c)</span><span class="publisher">Anvil Publishing, Inc. (2013)</span></li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI" target="_blank">encodeURI()</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURI" target="_blank">decodeURI()</a>, MDN Web Docs</li>
+                    <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank">Regular Expressions</a>, MDN Web Docs</li>
+                    <li><a href="https://stackoverflow.com/questions/169008/regex-for-parsing-directory-and-filename" target="_blank">Regex for parsing directory and filename</a>, Stack Overflow</li>
+                </ul>
+                <p>v.1.2.0</p>
+            </div>
+        </span>
+        <div id="header" class="sub">
+            <h1>dirStr<span> v.1.2.0</span></h1>
+            <p>String and directory/path converter</p>
+        </div>
+        <form class="container" action="">
+            <div class="sub">
+                <h3>String to Directory</h3>
+            </div>
+            <div class="sub">
+                <label for="old_string_field">String</label>
+                <textarea name="old_string_field" id="strBox1" cols="30" rows="1" placeholder="Enter string here"></textarea>
+            </div>
+            <div class="sub">
+                <label for="new_string_field">Directory</label>
+                <textarea name="new_string_field" id="dirBox1" cols="30" rows="1" placeholder="Directory goes here"></textarea>
+            </div>
+            <div id="options" class="sub">
+                <input type="button" value="Convert" onclick="_convert('strdir')">
+                &nbsp;
+                <input type="reset" value="Clear">
+            </div>
+        </form>
+        <form class="container" action="">
+            <div class="sub">
+                <h3>Directory to String</h3>
+            </div>
+            <div class="sub">
+                <label for="new_string_field">Directory</label>
+                <textarea name="new_string_field" id="dirBox2" cols="30" rows="1" placeholder="Directory goes here"></textarea>
+            </div>
+            <div class="sub">
+                <label for="old_string_field">String</label>
+                <textarea name="old_string_field" id="strBox2" cols="30" rows="1" placeholder="Enter string here"></textarea>
+            </div>
+            <div id="options" class="sub">
+                <input type="button" value="Convert" onclick="_convert('dirstr')">
+                &nbsp;
+                <input type="reset" value="Clear">
+            </div>
+        </form>
+        <p id="footer">Made with <span>♥</span> by <a id="myGithub" href="https://github.com/MumuNiMochii" target="_blank">MumuNiMochii</a>.</p>
+    </div>
+</body>
+</html>
